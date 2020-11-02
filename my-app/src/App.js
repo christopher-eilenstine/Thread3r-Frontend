@@ -9,7 +9,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        const url = 'http://localhost:8080/sayhello?name=Java';
+        const url = 'http://localhost:8080/hello?name=Java';
         axios.get(url).then(response => {
             console.log('response : ');
             console.log(response);
