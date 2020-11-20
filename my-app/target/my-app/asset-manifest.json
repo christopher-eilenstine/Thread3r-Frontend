@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "http://localhost:8080/my-app/static/css/main.005b8260.chunk.css",
+    "main.js": "http://localhost:8080/my-app/static/js/main.d05a5b85.chunk.js",
+    "main.js.map": "http://localhost:8080/my-app/static/js/main.d05a5b85.chunk.js.map",
+    "runtime-main.js": "http://localhost:8080/my-app/static/js/runtime-main.48d14713.js",
+    "runtime-main.js.map": "http://localhost:8080/my-app/static/js/runtime-main.48d14713.js.map",
+    "static/css/2.20aa2d7b.chunk.css": "http://localhost:8080/my-app/static/css/2.20aa2d7b.chunk.css",
+    "static/js/2.df32bf4f.chunk.js": "http://localhost:8080/my-app/static/js/2.df32bf4f.chunk.js",
+    "static/js/2.df32bf4f.chunk.js.map": "http://localhost:8080/my-app/static/js/2.df32bf4f.chunk.js.map",
+    "index.html": "http://localhost:8080/my-app/index.html",
+    "static/css/2.20aa2d7b.chunk.css.map": "http://localhost:8080/my-app/static/css/2.20aa2d7b.chunk.css.map",
+    "static/css/main.005b8260.chunk.css.map": "http://localhost:8080/my-app/static/css/main.005b8260.chunk.css.map",
+    "static/js/2.df32bf4f.chunk.js.LICENSE.txt": "http://localhost:8080/my-app/static/js/2.df32bf4f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.48d14713.js",
+    "static/css/2.20aa2d7b.chunk.css",
+    "static/js/2.df32bf4f.chunk.js",
+    "static/css/main.005b8260.chunk.css",
+    "static/js/main.d05a5b85.chunk.js"
+  ]
+}
