@@ -108,14 +108,14 @@ const App = () => {
 
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/home"]} component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/profile" component={Profile} />
-          <Route path="/user" component={BoardUser} />
-          <Route path="/mod" component={BoardModerator} />
-          <Route path="/admin" component={BoardAdmin} />
-          <Route exact path="/groups" component={GroupSearch} />
+          <Route basename={process.env.REACT_APP_ROUTER_BASE || ''} exact path={["/", "/home"]} component={Home} />
+          <Route basename={process.env.REACT_APP_ROUTER_BASE || ''} exact path="/login" component={Login} />
+          <Route basename={process.env.REACT_APP_ROUTER_BASE || ''} exact path="/register" component={Register} />
+          <Route basename={process.env.REACT_APP_ROUTER_BASE || ''} exact path="/profile" component={Profile} />
+          <Route basename={process.env.REACT_APP_ROUTER_BASE || ''} path="/user" component={BoardUser} />
+          <Route basename={process.env.REACT_APP_ROUTER_BASE || ''} path="/mod" component={BoardModerator} />
+          <Route basename={process.env.REACT_APP_ROUTER_BASE || ''} path="/admin" component={BoardAdmin} />
+          <Route basename={process.env.REACT_APP_ROUTER_BASE || ''} exact path="/groups" component={GroupSearch} />
         </Switch>
       </div>
     </div>

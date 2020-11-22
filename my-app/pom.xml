@@ -16,7 +16,8 @@
     </properties>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <!--finalName>${project.artifactId}</finalName-->
+        <finalName>thread3r</finalName>
         <plugins>
             <!-- Standard plugin to generate WAR -->
             <plugin>
@@ -116,8 +117,8 @@
 
                         <configuration>
                             <environmentVariables>
-                                <PUBLIC_URL>http://localhost:8080/${project.artifactId}</PUBLIC_URL>
-                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>
+                                <PUBLIC_URL>http://localhost:8080/thread3r</PUBLIC_URL>
+                                <REACT_APP_ROUTER_BASE>/thread3r</REACT_APP_ROUTER_BASE>
                             </environmentVariables>
                         </configuration>
                     </plugin>
@@ -135,8 +136,8 @@
 
                         <configuration>
                             <environmentVariables>
-                                <PUBLIC_URL>http://ec2-18-190-24-244.us-east-2.compute.amazonaws.com/${project.artifactId}</PUBLIC_URL>
-                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>
+                                <PUBLIC_URL>http://csci4830.ddns.net:8080/thread3r</PUBLIC_URL>
+                                <REACT_APP_ROUTER_BASE>/thread3r</REACT_APP_ROUTER_BASE>
                             </environmentVariables>
                         </configuration>
                     </plugin>

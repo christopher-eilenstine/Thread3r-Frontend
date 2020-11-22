@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import AuthService from "../services/auth.service";
-import GroupSearchAPI from "../services/group-search-api";
+//import AuthService from "../services/auth.service";
+//import GroupSearchAPI from "../services/group-search-api";
 
 // const required = (value) => {
 //   if (!value) {
@@ -19,8 +19,8 @@ const GroupSearch = (props) => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const user = AuthService.getCurrentUser();
-  const userId = user.userId;
+//  const user = AuthService.getCurrentUser();
+//  const userId = user.userId;
 
 //   const [username, setUsername] = useState("");
 //   const [password, setPassword] = useState("");
