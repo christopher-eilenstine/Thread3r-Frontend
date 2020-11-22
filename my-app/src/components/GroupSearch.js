@@ -1,126 +1,44 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-//import AuthService from "../services/auth.service";
-//import GroupSearchAPI from "../services/group-search-api";
+import GroupSearchAPI from "../services/group-search-api";
 
-// const required = (value) => {
-//   if (!value) {
-//     return (
-//       <div className="alert alert-danger" role="alert">
-//         This field is required!
-//       </div>
-//     );
-//   }
-// };
+const GroupSearch = () => {
+  // const [search, setSearch] = useState('');
+  const [allGroups, setAllGroups] = useState([]);
+  // const [filteredGroups, setFilteredGroups] = useState([]);
 
-const GroupSearch = (props) => {
-  const form = useRef();
-  const checkBtn = useRef();
+  useEffect(() => {
+    GroupSearchAPI.getAllGroups()
+    .then((responseJson) => {
+      setAllGroups(responseJson);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }, []);
 
-//  const user = AuthService.getCurrentUser();
-//  const userId = user.userId;
+  console.log(allGroups);
 
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-  const [SearchForGroup, setSearchForGroup] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  if(allGroups[0] !== undefined){
+    var groupName = allGroups[0].name;
+  }
+  else{
+    var groupName = "Loading..."
+  }
 
-  const onChangeSearchForGroup = (e) => {
-    const SearchForGroup = e.target.value;
-    setSearchForGroup(SearchForGroup);
-  };
-
-//   const onChangePassword = (e) => {
-//     const password = e.target.value;
-//     setPassword(password);
-//   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setMessage("");
-    setLoading(true);
-
-    form.current.validateAll();
-
-    if (checkBtn.current.context._errors.length === 0) {
-        //group search api goes here
-
-    //   AuthService.login(username, password).then(
-    //     () => {
-    //       props.history.push("/profile");
-    //       window.location.reload();
-    //     },
-    //     (error) => {
-    //       const resMessage =
-    //         (error.response &&
-    //           error.response.data &&
-    //           error.response.data.message) ||
-    //         error.message ||
-    //         error.toString();
-
-    //       setLoading(false);
-    //       setMessage(resMessage);
-    //     }
-    //   );
-    } else {
-      setLoading(false);
-    }
-  };
+  // if (allGroups){
+  //   var groupOut = allGroups[0].name;
+  // }
+  // else{
+  //   var groupOut = "No groups available";
+  // }
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-
-        <Form onSubmit={handleSubmit} ref={form}>
-          <div className="form-group">
-            <label htmlFor="username">Search for a group!</label>
-            <Input
-              type="text"
-              className="form-control"
-              name="username"
-              value={SearchForGroup}
-              onChange={onChangeSearchForGroup}
-            //   validations={[required]}
-            />
-          </div>
-
-          {/* <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <Input
-              type="password"
-              className="form-control"
-              name="password"
-              value={password}
-              onChange={onChangePassword}
-              validations={[required]}
-            /> 
-          </div> */}
-
-          <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={loading}>
-              {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
-              )}
-              <span>Submit</span>
-            </button>
-          </div>
-
-          {message && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
-                {message}
-              </div>
-            </div>
-          )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
-        </Form>
-      </div>
+    <div>
+      {groupName}
     </div>
-  );
+  )
 };
 
 export default GroupSearch;

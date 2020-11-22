@@ -15,8 +15,6 @@ import BoardAdmin from "./components/BoardAdmin";
 import GroupSearch from "./components/GroupSearch";
 
 const App = () => {
-  // const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-  // const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
@@ -24,13 +22,12 @@ const App = () => {
 
     if (user) {
       setCurrentUser(user);
-      // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
   }, []);
 
   const logOut = () => {
     AuthService.logout();
+    setCurrentUser(undefined);
   };
 
   return (
@@ -51,22 +48,6 @@ const App = () => {
             </Link>
           </li>
 
-          {/* {showModeratorBoard && (
-            <li className="nav-item">
-              <Link to={"/mod"} className="nav-link">
-                Moderator Board
-              </Link>
-            </li>
-          )}
-
-          {showAdminBoard && (
-            <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
-                Admin Board
-              </Link>
-            </li>
-          )} */}
-
           {currentUser && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
@@ -84,9 +65,9 @@ const App = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
+              <Link to={"/login"} className="nav-link" onClick={logOut}>
                 LogOut
-              </a>
+              </Link>
             </li>
           </div>
         ) : (
