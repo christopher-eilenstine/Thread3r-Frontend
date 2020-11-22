@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:8080/api/groups/";
+const API_URL = "http://csci4830.ddns.net:8080/thread3r-backend/api/groups/";
 
 const getSubscribed = async (userId) => {
     const response = await axios
