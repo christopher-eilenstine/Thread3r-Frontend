@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Collapse, Space, Input } from 'antd';
+import { Card, Col, Row, Input, Button } from 'antd';
 import GroupSearchAPI from "../services/group-search-api";
+import "./GroupSearch.css"
+import "antd/dist/antd.css";
 
-const { Panel } = Collapse;
 const { Search } = Input;
 
 const GroupSearch = () => {
@@ -21,14 +22,6 @@ const GroupSearch = () => {
     });
   }, []);
 
-  if(allGroups !== undefined){
-    var groupNames = [];
-    for(var i = 0; i < filteredGroups.length; i++){
-      groupNames[i] = filteredGroups[i].name;
-      console.log(groupNames);
-    }
-  }
-
   const searchGroup = (e) => {
     if(e){
       const newData = allGroups.filter(
@@ -42,8 +35,6 @@ const GroupSearch = () => {
       );
       setFilteredGroups(newData);
       setSearch(e);
-      console.log(filteredGroups);
-      console.log(search);  
     }
     else {
       setFilteredGroups(allGroups);
@@ -59,20 +50,22 @@ const GroupSearch = () => {
   // }
 
   return (
-    <div>
-      <div>
+    <div className="group-search">
+      <div className="search-bar">
         <Search placeholder="Search for group" size="large" onSearch={searchGroup} />
       </div>
-      <div>
+      <div className="group-cards">
       <ul>
-        {groupNames.map(item => {
-          return <Space direction="vertical">
-            <Collapse collapsible="header" bordered>
-              <Panel header={item}>
-                <p>todo</p>
-              </Panel>
-            </Collapse>
-          </Space>
+        {filteredGroups.map(item => {
+          return <Row gutter={16} className="group-row">
+            <Col span={23}>
+              <Card title={item.name} bordered>
+                <p>{item.description}</p>
+                <Button type="primary">Subscribe</Button><br/><br/>
+                <Button type="primary">Go to group</Button><br/>
+              </Card>
+            </Col>
+          </Row>
         })}
       </ul>
       </div>

@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -11,8 +11,8 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
+} */
+/* 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,18 +22,18 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
-}
+} */
 
-label {
+/* label {
   display: block;
   margin-top: 10px;
-}
+} */
 
-.card-container.card {
+/* .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;
 }
@@ -59,8 +59,8 @@ label {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-}
-
+} */
+/* 
 
 @keyframes App-logo-spin {
   from {
@@ -69,4 +69,4 @@ label {
   to {
     transform: rotate(360deg);
   }
-}
+} */
