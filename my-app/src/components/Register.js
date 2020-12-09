@@ -46,15 +46,15 @@ const vpassword = (value) => {
   }
 };
 
-const samepassword = (value) => {
-  if (value != verifyPassword) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        These passwords do not match!
-      </div>
-    );
-  }
-};
+// const samepassword = (value, verifyPassword) => {
+//   if (value != verifyPassword) {
+//     return (
+//       <div className="alert alert-danger" role="alert">
+//         These passwords do not match!
+//       </div>
+//     );
+//   }
+// };
 
 const Register = (props) => {
   const form = useRef();
@@ -97,6 +97,11 @@ const Register = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
+      if(password !== verifyPassword){
+        setMessage("The passwords do not match");
+        setSuccessful(false);
+      }
+      else{
       AuthService.register(username, email, password).then(
         (response) => {
           setMessage(response.data.message);
@@ -115,6 +120,7 @@ const Register = (props) => {
         }
       );
     }
+  }
   };
 
   return (
@@ -173,7 +179,7 @@ const Register = (props) => {
                   name="verifyPassword"
                   value={verifyPassword}
                   onChange={onChangeVerifyPassword}
-                  validations={[required, samepassword(password)]}
+                  // validations={[required, samepassword(password, verifyPassword)]}
                 />
               </div>
 
