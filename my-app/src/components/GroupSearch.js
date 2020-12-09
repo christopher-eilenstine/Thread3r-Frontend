@@ -1,30 +1,45 @@
-import React, { useState, useRef, useEffect } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
+import React, { useState, useEffect } from "react";
+import { Card, Col, Row, Input, Button } from 'antd';
 import GroupSearchAPI from "../services/group-search-api";
+import "./GroupSearch.css"
+import "antd/dist/antd.css";
+
+const { Search } = Input;
 
 const GroupSearch = () => {
-  // const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
   const [allGroups, setAllGroups] = useState([]);
-  // const [filteredGroups, setFilteredGroups] = useState([]);
+  const [filteredGroups, setFilteredGroups] = useState([]);
 
   useEffect(() => {
     GroupSearchAPI.getAllGroups()
     .then((responseJson) => {
       setAllGroups(responseJson);
+      setFilteredGroups(responseJson)
     })
     .catch((error) => {
       console.error(error);
     });
   }, []);
 
-  console.log(allGroups);
-
-  if(allGroups[0] !== undefined){
-    var groupName = allGroups[0].name;
-  }
-  else{
-    var groupName = "Loading..."
+  const searchGroup = (e) => {
+    if(e){
+      const newData = allGroups.filter(
+        function(item){
+          const itemData = item.name
+          ? item.name.toUpperCase()
+          : ''.toUpperCase();
+          const textData = e.toUpperCase();
+          return itemData.indexOf(textData) > -1;
+        }
+      );
+      setFilteredGroups(newData);
+      setSearch(e);
+    }
+    else {
+      setFilteredGroups(allGroups);
+      setSearch(e);
+    }
   }
 
   // if (allGroups){
@@ -35,10 +50,29 @@ const GroupSearch = () => {
   // }
 
   return (
-    <div>
-      {groupName}
+    <div className="group-search">
+      <div className="search-bar">
+        <Search placeholder="Search for group" size="large" onSearch={searchGroup} />
+      </div>
+      <div className="group-cards">
+      <ul>
+        {filteredGroups.map(item => {
+          return <Row gutter={16} className="group-row">
+            <Col span={23}>
+              <Card title={item.name} bordered>
+                <p>{item.description}</p>
+                <Button type="primary">Subscribe</Button><br/><br/>
+                <Button type="primary">Go to group</Button><br/>
+              </Card>
+            </Col>
+          </Row>
+        })}
+      </ul>
+      </div>
     </div>
   )
 };
+
+
 
 export default GroupSearch;
