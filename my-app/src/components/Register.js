@@ -47,6 +47,16 @@ const vpassword = (value) => {
   }
 };
 
+// const samepassword = (value, verifyPassword) => {
+//   if (value != verifyPassword) {
+//     return (
+//       <div className="alert alert-danger" role="alert">
+//         These passwords do not match!
+//       </div>
+//     );
+//   }
+// };
+
 const Register = (props) => {
   const form = useRef();
   const checkBtn = useRef();
@@ -54,6 +64,7 @@ const Register = (props) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [verifyPassword, setVerifyPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -72,6 +83,12 @@ const Register = (props) => {
     setPassword(password);
   };
 
+  const onChangeVerifyPassword = (e) => {
+    const verifyPassword = e.target.value;
+    setVerifyPassword(verifyPassword);
+  };
+  
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -81,6 +98,11 @@ const Register = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
+      if(password !== verifyPassword){
+        setMessage("The passwords do not match");
+        setSuccessful(false);
+      }
+      else{
       AuthService.register(username, email, password).then(
         (response) => {
           setMessage(response.data.message);
@@ -99,6 +121,7 @@ const Register = (props) => {
         }
       );
     }
+  }
   };
 
   return (
@@ -146,6 +169,18 @@ const Register = (props) => {
                   value={password}
                   onChange={onChangePassword}
                   validations={[required, vpassword]}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="verifypassword">Verify Password</label>
+                <Input
+                  type="password"
+                  className="form-control"
+                  name="verifyPassword"
+                  value={verifyPassword}
+                  onChange={onChangeVerifyPassword}
+                  // validations={[required, samepassword(password, verifyPassword)]}
                 />
               </div>
 
