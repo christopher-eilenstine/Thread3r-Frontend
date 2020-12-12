@@ -17,7 +17,7 @@ const GroupPage = (props) => {
         .catch((error) => {
           console.error(error);
         });
-      }, []);
+      }, [groupId]);
 
       useEffect(() => {
         GroupAPI.getGroupThreads(groupId)
@@ -27,7 +27,7 @@ const GroupPage = (props) => {
         .catch((error) => {
           console.error(error);
         });
-      }, []);
+      }, [groupId]);
     
     return (
       <div className="group-page">
