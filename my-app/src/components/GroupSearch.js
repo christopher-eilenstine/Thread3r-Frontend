@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Card, Col, Row, Input, Button } from 'antd';
-import GroupSearchAPI from "../services/group-search-api";
+import { Link } from "react-router-dom";
+import GroupAPI from "../services/group-api";
 import "./GroupSearch.css"
 import "antd/dist/antd.css";
+
 
 const { Search } = Input;
 
@@ -10,9 +12,10 @@ const GroupSearch = () => {
   const [search, setSearch] = useState('');
   const [allGroups, setAllGroups] = useState([]);
   const [filteredGroups, setFilteredGroups] = useState([]);
+  const [currentGroup, setCurrentGroup] = useState([]);
 
   useEffect(() => {
-    GroupSearchAPI.getAllGroups()
+    GroupAPI.getAllGroups()
     .then((responseJson) => {
       setAllGroups(responseJson);
       setFilteredGroups(responseJson)
@@ -35,6 +38,7 @@ const GroupSearch = () => {
       );
       setFilteredGroups(newData);
       setSearch(e);
+      console.log(search);
     }
     else {
       setFilteredGroups(allGroups);
@@ -42,12 +46,16 @@ const GroupSearch = () => {
     }
   }
 
-  // if (allGroups){
-  //   var groupOut = allGroups[0].name;
-  // }
-  // else{
-  //   var groupOut = "No groups available";
-  // }
+  const setGroupItem = async (e) => {
+    await setCurrentGroup(e);
+    console.log(e);
+  }
+
+  const getGroup = async() => {
+    const toReturn = await currentGroup;
+    return toReturn;
+  }
+  
 
   return (
     <div className="group-search">
@@ -62,7 +70,9 @@ const GroupSearch = () => {
               <Card title={item.name} bordered>
                 <p>{item.description}</p>
                 <Button type="primary">Subscribe</Button><br/><br/>
-                <Button type="primary">Go to group</Button><br/>
+                <Link to={'/groups/'+item.id}>
+                <Button type="primary">Go To Group</Button><br/>
+                </Link>
               </Card>
             </Col>
           </Row>
@@ -70,6 +80,7 @@ const GroupSearch = () => {
       </ul>
       </div>
     </div>
+    
   )
 };
 

@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from "react";
-
-import UserService from "../services/user.service";
+import GroupAPI from "../services/group-api";
+import { Card, Col, Row,} from 'antd';
+import "antd/dist/antd.css";
 
 const Home = () => {
-  const [content, setContent] = useState("");
+  
+  const [allThreads, setAllThreads] = useState([]);
 
   useEffect(() => {
-    UserService.getPublicContent().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-
-        setContent(_content);
-      }
-    );
+    GroupAPI.getAllThreads()
+    .then((responseJson) => {
+      setAllThreads(responseJson);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }, []);
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
+    <div>
+      <ul>
+        {allThreads.map(item => {
+          return <Row gutter={16} className="group-row">
+            <Col span={23}>
+              <Card title={item.title} bordered>
+                <p>{item.content}</p>
+              </Card>
+            </Col>
+          </Row>
+        })}
+      </ul>
     </div>
   );
 };
