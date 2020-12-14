@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import GroupSearch from "./components/GroupSearch";
 import GroupPage from "./components/Group";
+import ThreadPage from "./components/Thread";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -41,17 +42,10 @@ const App = () => {
             </li>
             <li>
             <Link to={"/groupsearch"} className="nav-link">
-              Group Search
+              Groups
             </Link>
           </li>
 
-          {currentUser && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
-              </Link>
-            </li>
-          )}
         </div>
 
         {currentUser ? (
@@ -92,6 +86,7 @@ const App = () => {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/groupsearch" component={GroupSearch} />
           <Route exact path="/groups/:id" render={(props) => <GroupPage {...props} />} />
+          <Route exact path="/threads/:groupId/:threadId" render={(props) => <ThreadPage {...props} />} />
         </Switch>
       </div>
     </div>
