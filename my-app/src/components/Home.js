@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GroupAPI from "../services/group-api";
-import { Card, Col, Row,} from 'antd';
+import { Card, Col, Row, Button} from 'antd';
+import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 
 const Home = () => {
@@ -24,7 +25,9 @@ const Home = () => {
           return <Row gutter={16} className="group-row">
             <Col span={23}>
               <Card title={item.title} bordered>
-                <p>{item.content}</p>
+              <Link to={'/threads/'+item.group+'/'+item.id}>
+                <Button type="primary">Go To Thread</Button><br/>
+                </Link>
               </Card>
             </Col>
           </Row>

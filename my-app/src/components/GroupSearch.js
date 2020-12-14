@@ -12,7 +12,7 @@ const GroupSearch = () => {
   const [search, setSearch] = useState('');
   const [allGroups, setAllGroups] = useState([]);
   const [filteredGroups, setFilteredGroups] = useState([]);
-  const [currentGroup, setCurrentGroup] = useState([]);
+  // const [currentGroup, setCurrentGroup] = useState([]);
 
   useEffect(() => {
     GroupAPI.getAllGroups()
@@ -24,6 +24,14 @@ const GroupSearch = () => {
       console.error(error);
     });
   }, []);
+
+  const clickSub = (e) => {
+    GroupAPI.Subscribe(e);
+  }
+
+  const clickUnsub = (e) => {
+    GroupAPI.unSubscribe(e);
+  }
 
   const searchGroup = (e) => {
     if(e){
@@ -46,15 +54,14 @@ const GroupSearch = () => {
     }
   }
 
-  const setGroupItem = async (e) => {
-    await setCurrentGroup(e);
-    console.log(e);
-  }
+  // const setGroupItem = async (e) => {
+  //   await setCurrentGroup(e);
+  // }
 
-  const getGroup = async() => {
-    const toReturn = await currentGroup;
-    return toReturn;
-  }
+  // const getGroup = async() => {
+  //   const toReturn = await currentGroup;
+  //   return toReturn;
+  // }
   
 
   return (
@@ -68,11 +75,7 @@ const GroupSearch = () => {
           return <Row gutter={16} className="group-row">
             <Col span={23}>
               <Card title={item.name} bordered>
-                <p>{item.description}</p>
-                <Button type="primary">Subscribe</Button><br/><br/>
-                <Link to={'/groups/'+item.id}>
-                <Button type="primary">Go To Group</Button><br/>
-                </Link>
+                <Button type="primary" size="small" onClick={() => clickSub(item.id)}>Subscribe</Button> <Button type="primary" size="small" onClick={() => clickUnsub(item.id)}>Unsubscribe</Button> <Link to={'/groups/'+item.id}> <Button type="primary" size="small">Go To Group</Button></Link>
               </Card>
             </Col>
           </Row>

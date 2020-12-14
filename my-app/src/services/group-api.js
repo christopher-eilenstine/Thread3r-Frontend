@@ -53,9 +53,9 @@ const getSubscribed = async (userId) => {
   return response.data;
   }
 
-  const postThread = async (groupId) => {
+  const postThread = async (groupId, title, content) => {
     const response = await axios
-    .post(API_URL + groupId + "threads", {
+    .post(API_URL + groupId + "/threads", {"title": title, "content": content}, {
       headers: authHeader()
     });
     return response.data;
@@ -63,7 +63,47 @@ const getSubscribed = async (userId) => {
 
   const getThread = async (groupId, threadId) => {
     const response = await axios
-    .post(API_URL + groupId + "threads" + threadId, {
+    .get(API_URL + groupId + "/threads/" + threadId, {
+      headers: authHeader()
+    });
+    return response.data;
+  }
+
+  const getComments = async (threadId) => {
+    const response = await axios
+    .get(API_URL + "threads/" + threadId + "/comments", {
+      headers: authHeader()
+    });
+    return response.data;
+  }
+
+  const postComment = async (threadId, content) => {
+    const response = await axios
+    .post(API_URL + "threads/" + threadId + "/comments", {"content": content}, {
+      headers: authHeader(),
+    });
+    return response.data;
+  }
+
+  const Subscribe = async (groupId) => {
+    const response = await axios
+    .post(API_URL + groupId + "/subscribe", {}, {
+        headers: authHeader()
+    });
+    return response.data;
+  }
+
+  const unSubscribe = async (groupId) => {
+    const response = await axios
+    .post(API_URL + groupId + "/unsubscribe", {}, {
+        headers: authHeader()
+    });
+    return response.data;
+  }
+
+  const createGroup = async (name, description) => {
+    const response = await axios
+    .post(API_URL, {"name": name, "description": description}, {
       headers: authHeader()
     });
     return response.data;
@@ -77,7 +117,12 @@ const getSubscribed = async (userId) => {
     getGroupThreads,
     postThread,
     getThread,
-    getGroup
+    getGroup,
+    getComments,
+    postComment,
+    Subscribe,
+    unSubscribe,
+    createGroup,
   }
   
   export default toExport;
