@@ -3,6 +3,21 @@ import authHeader from "./auth-header";
 
 const API_URL = "http://csci4830.ddns.net:8080/thread3r-backend/api/groups/";
 
+const getCreatedGroups = async () => {
+  const response = await axios.get(API_URL + "created", {headers: authHeader()});
+  return response.data;
+};
+
+const getCreatedThreads = async () => {
+  const response = await axios.get(API_URL + "threads/created", {headers: authHeader()});
+  return response.data;
+};
+
+const getCreatedComments = async () => {
+  const response = await axios.get(API_URL + "threads/comments/created", {headers: authHeader()});
+  return response.data;
+};
+
 const getSubscribed = async (userId) => {
     const response = await axios
     .get(API_URL + "subscribed", {
@@ -110,6 +125,9 @@ const getSubscribed = async (userId) => {
   }
 
   const toExport = {
+    getCreatedGroups,
+    getCreatedThreads,
+    getCreatedComments,
     getSubscribed,
     searchGroups,
     getAllGroups,

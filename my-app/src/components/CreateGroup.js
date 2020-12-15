@@ -57,6 +57,7 @@ const CreateGroup = (props) => {
       <Form 
         {...layout}
         name="basic"
+        onFinish={handleCreateGroup}
       >
         <Form.Item
           label="Name"
@@ -73,7 +74,7 @@ const CreateGroup = (props) => {
           <Input onChange={onChangeDescription} />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit" onSubmit={handleCreateGroup}>
+          <Button type="primary" htmlType="submit">
             Create
           </Button>
         </Form.Item>

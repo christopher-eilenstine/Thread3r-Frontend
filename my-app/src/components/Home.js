@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GroupAPI from "../services/group-api";
-import { Card, Col, Row, Button} from 'antd';
+import { Card, Col, Row, Button } from 'antd';
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 

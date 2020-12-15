@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GroupAPI from "../services/group-api";
-import { Card, Col, Row, Button, Modal, Form, Input} from 'antd';
+import { Card, Col, Row, Button, Modal, Form, Input, Alert} from 'antd';
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./Group.css"
@@ -22,9 +22,33 @@ const GroupPage = (props) => {
       });
     };
 
+    const clickSub = (e) => {
+      GroupAPI.Subscribe(e)
+      .then(
+        (response) => {
+          setMessage("You have subscribed successfully!");
+        },
+        (error) => {
+          setMessage("You are already subscribed!");
+        }
+      );
+    }
+  
+    const clickUnsub = (e) => {
+      GroupAPI.unSubscribe(e)
+      .then(
+        (response) => {
+          setMessage("You have unsubscribed successfully!");
+        },
+        (error) => {
+          setMessage("You are not subscribed or you're the creator of this group!");
+        }
+      );
+    }
+
     const refreshPage = () => {
       window.location.reload(false);
-  }
+    }
 
     const onFinishFailed = errorInfo => {
       console.log('Failed:', errorInfo);
@@ -34,6 +58,7 @@ const GroupPage = (props) => {
     const [groupThreads, setGroupThreads] = useState([]);
     const groupId = props.match.params.id;
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [message, setMessage] = useState("");
 
     const showModal = () => {
       setIsModalVisible(true);
@@ -74,14 +99,16 @@ const GroupPage = (props) => {
     
     return (
       <div className="group-page">
-
+        {message && (
+          <Alert message={message} type='info'/>
+        )}
         <Row gutter={16}>
             <Col span={24}>
               <Card title={group.name} bordered>
                 <p>{group.description}</p>
                 <p>Creator: {group.creator}</p>
                 <p>Created: {group.created}</p>
-                <Button size="small" type="primary" onClick={showModal}>Create Thread</Button><br/><br/><br/>
+                <Button type="primary" size="small" onClick={() => clickSub(group.id)}>Subscribe</Button> <Button type="primary" size="small" onClick={() => clickUnsub(group.id)}>Unsubscribe</Button> <Button size="small" type="primary" onClick={showModal}>Create Thread</Button><br/><br/><br/>
                 <ul>
         {groupThreads.map(item => {
           return <Row gutter={16} className="group-row">
