@@ -115,7 +115,7 @@ const GroupPage = (props) => {
       <Form.Item
         label="Thread Title"
         name="ThreadTitle"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[{ required: true, message: 'Please input a title!' }]}
       >
         <Input />
       </Form.Item>
@@ -123,7 +123,7 @@ const GroupPage = (props) => {
       <Form.Item
         label="Thread Content"
         name="ThreadContent"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[{ required: true, message: 'Please input some content!' }]}
       >
         <Input />
       </Form.Item>
