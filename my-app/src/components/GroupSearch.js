@@ -20,6 +20,11 @@ const GroupSearch = () => {
   useEffect(() => {
     GroupAPI.getAllGroups()
     .then((responseJson) => {
+      responseJson.sort((a, b) => {
+        if (a.name.toUpperCase() < b.name.toUpperCase()) return -1;
+        if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;
+        return 0;
+      });
       setAllGroups(responseJson);
       setFilteredGroups(responseJson)
     })
@@ -30,6 +35,11 @@ const GroupSearch = () => {
 
   useEffect(() => {
     GroupAPI.getSubscribed().then((responseJson) => {
+      responseJson.sort((a, b) => {
+        if (a.name.toUpperCase() < b.name.toUpperCase()) return -1;
+        if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;
+        return 0;
+      });
       setSubscribedGroups(responseJson);
     })
     .catch((error) => {
@@ -71,7 +81,11 @@ const GroupSearch = () => {
           const textData = e.toUpperCase();
           return itemData.indexOf(textData) > -1;
         }
-      );
+      ).sort((a, b) => {
+        if (a.name.toUpperCase() < b.name.toUpperCase()) return -1;
+        if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;
+        return 0;
+      });
       setFilteredGroups(newData);
       setSearch(e);
       console.log(search);
@@ -97,11 +111,11 @@ const GroupSearch = () => {
   }
   
   return (
-    <Tabs onChange={handleChange} type='card'>
+    <Tabs type='card' onChange={handleChange}>
       <TabPane tab='Subscribed Groups' key="1">
         <div className="group-cards">
           <ul>
-            {subscribedGroups.map(item => {
+            {subscribedGroups.sort().map(item => {
               return <Row gutter={16} className="group-row">
                 <Col span={23}>
                   <Card title={item.name} bordered>
