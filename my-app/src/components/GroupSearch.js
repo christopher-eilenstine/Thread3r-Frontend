@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import GroupAPI from "../services/group-api";
 import "./GroupSearch.css"
 import "antd/dist/antd.css";
+import Form from "antd/lib/form/Form";
+import CreateGroup from "./CreateGroup";
 
 
 const { Search } = Input;
@@ -90,9 +92,14 @@ const GroupSearch = () => {
   //   const toReturn = await currentGroup;
   //   return toReturn;
   // }
+  const handleChange = (key) => {
+    if (key === "1") {
+      window.location.reload(false);
+    }
+  }
   
   return (
-    <Tabs type='card'>
+    <Tabs onChange={handleChange} type='card'>
       <TabPane tab='Subscribed Groups' key="1">
         <div className="group-cards">
           <ul>

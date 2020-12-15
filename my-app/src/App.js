@@ -11,6 +11,7 @@ import Profile from "./components/Profile";
 import GroupSearch from "./components/GroupSearch";
 import GroupPage from "./components/Group";
 import ThreadPage from "./components/Thread";
+import CreateGroup from "./components/CreateGroup";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -31,19 +32,35 @@ const App = () => {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
-          Thread3r
-        </Link>
+        {currentUser ? (
+          <Link to={"/"} className="navbar-brand">
+            Thread3r
+          </Link>
+        ) : (
+          <Link to={"/login"} className="navbar-brand">
+            Thread3r
+          </Link>
+        )}
+
         <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Home
-            </Link>
-            </li>
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/home"} className="nav-link">
+                  Home
+                </Link>
+              </li>
+            )}
             {currentUser && (
               <li>
                 <Link to={"/groupsearch"} className="nav-link">
                   Groups
+                </Link>
+              </li>
+            )}
+            {currentUser && (
+              <li>
+                <Link to={"/groupcreate"} className="nav-link">
+                  Create Group
                 </Link>
               </li>
             )}
@@ -83,10 +100,11 @@ const App = () => {
       <div className="container mt-3">
         <Switch>
           <Route exact path={["/", "/home"]} component={Home} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path={"/login"} component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/groupsearch" component={GroupSearch} />
+          <Route exact path="/groupcreate" component={CreateGroup} />
           <Route exact path="/groups/:id" render={(props) => <GroupPage {...props} />} />
           <Route exact path="/threads/:groupId/:threadId" render={(props) => <ThreadPage {...props} />} />
         </Switch>

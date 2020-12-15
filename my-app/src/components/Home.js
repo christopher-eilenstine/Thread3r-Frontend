@@ -20,6 +20,7 @@ const Home = () => {
 
   return (
     <div>
+      <center><h1>Recent Threads</h1></center>
       <ul>
         {allThreads.map(item => {
           return <Row gutter={16} className="group-row">
