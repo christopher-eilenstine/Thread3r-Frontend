@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import GroupAPI from "../services/group-api";
 import "./GroupSearch.css"
 import "antd/dist/antd.css";
-import Form from "antd/lib/form/Form";
-import CreateGroup from "./CreateGroup";
 
 
 const { Search } = Input;
