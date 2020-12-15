@@ -130,7 +130,7 @@ const GroupSearch = () => {
       <TabPane tab='Search Groups' key="2">
         <div className="group-search">
           <div className="search-bar">
-            <Search placeholder="Search for group" size="large" onSearch={searchGroup} />
+            <Search placeholder="Search for group" size="large" onSearch={searchGroup} enterButton="Search" />
           </div>
           <div className="group-cards">
             {message && (

@@ -124,6 +124,20 @@ const getSubscribed = async (userId) => {
     return response.data;
   }
 
+  const deleteGroup = async (groupId) => {
+    const response = await axios.delete(API_URL + groupId, {
+      headers: authHeader()
+    });
+    return response.data;
+  }
+
+  const deleteThread = async (groupId, threadId) => {
+    const response = await axios.delete(API_URL + groupId + "/threads/" + threadId, {
+      headers: authHeader()
+    });
+    return response.data;
+  }
+
   const toExport = {
     getCreatedGroups,
     getCreatedThreads,
@@ -141,6 +155,8 @@ const getSubscribed = async (userId) => {
     Subscribe,
     unSubscribe,
     createGroup,
+    deleteGroup,
+    deleteThread
   }
   
   export default toExport;
