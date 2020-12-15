@@ -87,7 +87,7 @@ const GroupSearch = () => {
       </div>
       <div className="group-cards">
         {message && (
-          <Alert message={message} type='info' closable />
+          <Alert message={message} type='info'/>
         )}
       <ul>
         {filteredGroups.map(item => {

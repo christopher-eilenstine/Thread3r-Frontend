@@ -14,10 +14,10 @@ const ThreadPage = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const onChangePostContent = (e) => {
-
-        GroupAPI.postComment(threadId, e);
-        setIsModalVisible(false);
-        refreshPage();
+        GroupAPI.postComment(threadId, e).then(() => {
+          setIsModalVisible(false);
+          refreshPage();
+        });
     }
 
     const refreshPage = () => {

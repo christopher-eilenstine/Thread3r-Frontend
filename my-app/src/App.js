@@ -40,11 +40,13 @@ const App = () => {
               Home
             </Link>
             </li>
-            <li>
-            <Link to={"/groupsearch"} className="nav-link">
-              Groups
-            </Link>
-          </li>
+            {currentUser && (
+              <li>
+                <Link to={"/groupsearch"} className="nav-link">
+                  Groups
+                </Link>
+              </li>
+            )}
 
         </div>
 

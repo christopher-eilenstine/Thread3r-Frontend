@@ -16,9 +16,10 @@ const tailLayout = {
 const GroupPage = (props) => {
 
     const onFinish = values => {
-      GroupAPI.postThread(group.id, values.ThreadTitle, values.ThreadContent);
-      setIsModalVisible(false);
-      refreshPage();
+      GroupAPI.postThread(group.id, values.ThreadTitle, values.ThreadContent).then(() => {
+        setIsModalVisible(false);
+        refreshPage();
+      });
     };
 
     const refreshPage = () => {
