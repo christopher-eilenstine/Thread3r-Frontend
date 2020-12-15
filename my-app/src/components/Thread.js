@@ -1,6 +1,7 @@
 import GroupAPI from "../services/group-api";
 import React, { useState, useEffect } from "react";
 import { Card, Col, Row, Button, Comment, Tooltip, Modal, Input} from 'antd';
+import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 
 const { Search } = Input;
@@ -71,7 +72,7 @@ const ThreadPage = (props) => {
         <div>
         <Row gutter={16} className="group-row">
             <Col span={23}>
-              <Card title={thread.title} bordered>
+              <Card title={thread.title} extra={<Link to={'/groups/'+thread.group}>Go to Group</Link>} bordered>
                 <p>{thread.content}</p>
                 <Button type="primary" onClick={showModal}>Add Comment</Button><br/>
               </Card>

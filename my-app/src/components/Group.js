@@ -110,18 +110,18 @@ const GroupPage = (props) => {
                 <p>Created: {group.created}</p>
                 <Button type="primary" size="small" onClick={() => clickSub(group.id)}>Subscribe</Button> <Button type="primary" size="small" onClick={() => clickUnsub(group.id)}>Unsubscribe</Button> <Button size="small" type="primary" onClick={showModal}>Create Thread</Button><br/><br/><br/>
                 <ul>
-        {groupThreads.map(item => {
-          return <Row gutter={16} className="group-row">
-            <Col span={23}>
-              <Card title={item.title} bordered>
-                <Link to={'/threads/'+group.id+'/'+item.id}>
-                <Button size="small" type="primary">Go To Thread</Button><br/>
-                </Link>
-              </Card>
-            </Col>
-          </Row>
-        })}
-      </ul>
+                {groupThreads.map(item => {
+                  return <Row gutter={16} className="group-row">
+                    <Col span={23}>
+                      <Card title={item.title} type='inner' bordered>
+                        <Link to={'/threads/'+group.id+'/'+item.id}>
+                          <Button size="small" type="primary">Go To Thread</Button><br/>
+                        </Link>
+                      </Card>
+                    </Col>
+                  </Row>
+                })}
+                </ul>
               </Card>
             </Col>
           </Row>

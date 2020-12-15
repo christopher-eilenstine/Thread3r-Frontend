@@ -30,7 +30,7 @@ const Home = () => {
         {allThreads.map(item => {
           return <Row gutter={16} className="group-row">
             <Col span={23}>
-              <Card title={item.title} bordered>
+              <Card title={item.title} type='inner' extra={<Link to={'/groups/'+item.group}>Go to Group</Link>} bordered>
               <Link to={'/threads/'+item.group+'/'+item.id}>
                 <Button type="primary">Go To Thread</Button><br/>
                 </Link>
