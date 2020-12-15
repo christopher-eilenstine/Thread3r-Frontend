@@ -11,6 +11,11 @@ const Home = () => {
   useEffect(() => {
     GroupAPI.getAllThreads()
     .then((responseJson) => {
+      responseJson.sort((a, b) => {
+        const date1 = new Date(a.created);
+        const date2 = new Date(b.created);
+        return date2.getTime() - date1.getTime();
+      });
       setAllThreads(responseJson);
     })
     .catch((error) => {

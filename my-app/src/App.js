@@ -33,7 +33,7 @@ const App = () => {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         {currentUser ? (
-          <Link to={"/"} className="navbar-brand">
+          <Link to={"/home"} className="navbar-brand">
             Thread3r
           </Link>
         ) : (
@@ -99,8 +99,8 @@ const App = () => {
 
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/home"]} component={Home} />
-          <Route exact path={"/login"} component={Login} />
+          <Route exact path={"/home"} component={Home} />
+          <Route exact path={["/", "/login"]} component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/groupsearch" component={GroupSearch} />
