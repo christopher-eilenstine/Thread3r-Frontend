@@ -103,7 +103,7 @@ const Profile = () => {
         <TabPane tab='Comments' key='4'>
           <ul>
             {comments.map(item => {
-              return <Comment
+              return <Comment actions={[<Link to={"/threads/"+item.group+"/"+item.thread}>Go to Thread</Link>]}
               author={item.creator}
               content={
                 <p>
