@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Col, Row, Input, Button } from 'antd';
+import { Card, Col, Row, Input, Button, Alert } from 'antd';
 import { Link } from "react-router-dom";
 import GroupAPI from "../services/group-api";
 import "./GroupSearch.css"
@@ -12,6 +12,7 @@ const GroupSearch = () => {
   const [search, setSearch] = useState('');
   const [allGroups, setAllGroups] = useState([]);
   const [filteredGroups, setFilteredGroups] = useState([]);
+  const [message, setMessage] = useState("");
   // const [currentGroup, setCurrentGroup] = useState([]);
 
   useEffect(() => {
@@ -26,11 +27,27 @@ const GroupSearch = () => {
   }, []);
 
   const clickSub = (e) => {
-    GroupAPI.Subscribe(e);
+    GroupAPI.Subscribe(e)
+    .then(
+      (response) => {
+        setMessage("You have subscribed successfully!");
+      },
+      (error) => {
+        setMessage("You are already subscribed!");
+      }
+    );
   }
 
   const clickUnsub = (e) => {
-    GroupAPI.unSubscribe(e);
+    GroupAPI.unSubscribe(e)
+    .then(
+      (response) => {
+        setMessage("You have unsubscribed successfully!");
+      },
+      (error) => {
+        setMessage("You are not subscribed or you're the creator of this group!");
+      }
+    );
   }
 
   const searchGroup = (e) => {
@@ -63,13 +80,15 @@ const GroupSearch = () => {
   //   return toReturn;
   // }
   
-
   return (
     <div className="group-search">
       <div className="search-bar">
         <Search placeholder="Search for group" size="large" onSearch={searchGroup} />
       </div>
       <div className="group-cards">
+        {message && (
+          <Alert message={message} type='info' closable />
+        )}
       <ul>
         {filteredGroups.map(item => {
           return <Row gutter={16} className="group-row">
